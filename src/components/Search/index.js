@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useGithubContext } from "../../hooks/useGithubContext";
 import "./styles.css";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
+  const { users, loading, searchUsers } = useGithubContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,12 +13,8 @@ const Search = () => {
       return;
     }
 
-    const res = await fetch(
-      `https://api.github.com/search/users?q=${searchText}`
-    );
-    const data = await res.json();
-
-    console.log(data);
+    searchUsers(searchText);
+    setSearchText("");
   };
 
   return (
