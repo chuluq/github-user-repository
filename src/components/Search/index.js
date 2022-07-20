@@ -1,8 +1,26 @@
+import { useState } from "react";
 import "./styles.css";
 
 const Search = () => {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!searchText) {
+      return;
+    }
+
+    const res = await fetch(
+      `https://api.github.com/search/users?q=${searchText}`
+    );
+    const data = await res.json();
+
+    console.log(data);
+  };
+
   return (
-    <form className="search-bar">
+    <form className="search-bar" onSubmit={handleSubmit}>
       <div className="search-icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -18,8 +36,11 @@ const Search = () => {
       </div>
       <input
         type="text"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
         placeholder="Search GitHub username..."
         className="search-input"
+        required
       />
       <button className="search-btn">Search</button>
     </form>

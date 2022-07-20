@@ -1,7 +1,11 @@
 import "./styles.css";
 
 const Card = () => {
-  return <div>Card</div>;
+  return (
+    <div>
+      <div>{/* <img src="" alt="" /> */}</div>
+    </div>
+  );
 };
 
 export default Card;
