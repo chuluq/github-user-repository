@@ -68,3 +68,27 @@ img {
 .container {
   padding: 1.5rem;
 }
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--text);
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--inner-background);
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--background);
+}

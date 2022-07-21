@@ -43,3 +43,38 @@
   width: 20px;
   height: 20px;
 }
+
+.no-autocomplete {
+  color: #999;
+  padding: 8px;
+}
+
+.autocomplete {
+  margin-top: 0.5rem;
+  border: 1px solid var(--text);
+  border-radius: 0.5rem;
+  border-top-width: 0;
+  list-style: none;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  /* width: calc(300px + 1rem); */
+  width: 100%;
+  max-width: 32rem;
+}
+
+.autocomplete li {
+  padding: 8px;
+}
+
+.autocomplete > .active,
+.autocomplete li:hover {
+  background-color: var(--text);
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.autocomplete li:not(:last-of-type) {
+  border-bottom: 1px solid var(--text);
+}
