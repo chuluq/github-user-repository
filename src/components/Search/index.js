@@ -49,6 +49,7 @@ const Search = () => {
     setSearchText(e.currentTarget.innerText);
     setUser({ name: e.currentTarget.innerText });
     getUserRepos(e.currentTarget.innerText);
+    setSearchText("");
   };
 
   const handleKeyDown = (e) => {
