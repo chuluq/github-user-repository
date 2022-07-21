@@ -4,11 +4,36 @@
   row-gap: 1.5rem;
   margin-top: 2rem;
 }
+.repos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.repos-name {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: var(--header);
+}
+.repos-select {
+  font-family: var(--font);
+}
+.repos-select select {
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+}
 
 @media screen and (min-width: 768px) {
-  .repos {
+  .repos-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .repos-content {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

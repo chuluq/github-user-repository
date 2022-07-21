@@ -7,6 +7,7 @@ import {
   GET_REPOS,
   SET_LOADING,
   SET_SUGGESTIONS,
+  SET_USER,
 } from "./types";
 
 let githubClientId;
@@ -26,6 +27,7 @@ const GithubState = (props) => {
     user: {},
     repos: [],
     suggestions: [],
+    page: 30,
     loading: false,
   };
 
@@ -48,12 +50,20 @@ const GithubState = (props) => {
     setSuggestions(data, text);
   };
 
+  const setUser = (user) => {
+    setLoading();
+
+    dispatch({ type: SET_USER, payload: user });
+  };
+
   // Get Repos
-  const getUserRepos = async (username) => {
+  const getUserRepos = async (username, page) => {
     setLoading();
 
     const res = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=created&direction=asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+      `https://api.github.com/users/${username}/repos?per_page=${
+        page ?? 30
+      }&sort=created&direction=asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     const data = await res.json();
 
@@ -88,6 +98,7 @@ const GithubState = (props) => {
         suggestions: state.suggestions,
         loading: state.loading,
         searchUsers,
+        setUser,
         clearUsers,
         getUserRepos,
       }}

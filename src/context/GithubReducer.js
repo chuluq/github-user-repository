@@ -1,6 +1,6 @@
 import {
   SEARCH_USERS,
-  GET_USER,
+  SET_USER,
   CLEAR_USERS,
   GET_REPOS,
   SET_LOADING,
@@ -15,7 +15,7 @@ export const GithubReducer = (state, action) => {
         users: action.payload,
         loading: false,
       };
-    case GET_USER:
+    case SET_USER:
       return {
         ...state,
         user: action.payload,

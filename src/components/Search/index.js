@@ -14,7 +14,7 @@ const Search = () => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
-  const { suggestions, loading, searchUsers, getUserRepos } =
+  const { suggestions, loading, searchUsers, setUser, getUserRepos } =
     useGithubContext();
 
   const handleChange = (e) => {
@@ -47,6 +47,8 @@ const Search = () => {
     setFiltered([]);
     setIsShow(false);
     setSearchText(e.currentTarget.innerText);
+    setUser({ name: e.currentTarget.innerText });
+    getUserRepos(e.currentTarget.innerText);
   };
 
   const handleKeyDown = (e) => {
@@ -103,14 +105,17 @@ const Search = () => {
         <button className="search-btn">Search</button>
       </form>
       <div className="search-results">
-        {loading && <Spinner />}
-        <AutoComplete
-          active={active}
-          filtered={filtered}
-          handleClick={handleClick}
-          isShow={isShow}
-          searchText={searchText}
-        />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <AutoComplete
+            active={active}
+            filtered={filtered}
+            handleClick={handleClick}
+            isShow={isShow}
+            searchText={searchText}
+          />
+        )}
       </div>
     </>
   );
