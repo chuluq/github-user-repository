@@ -4,17 +4,18 @@ import "./styles.css";
 
 const Search = () => {
   const [searchText, setSearchText] = useState("");
-  const { users, loading, searchUsers } = useGithubContext();
+  const { users, loading, searchUsers, getUserRepos } = useGithubContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!searchText) {
-      return;
-    }
+    // if (!searchText) {
+    //   return;
+    // }
 
-    searchUsers(searchText);
-    setSearchText("");
+    // searchUsers(searchText);
+    getUserRepos("chuluq");
+    // setSearchText("");
   };
 
   return (
@@ -38,7 +39,7 @@ const Search = () => {
         onChange={(e) => setSearchText(e.target.value)}
         placeholder="Search GitHub username..."
         className="search-input"
-        required
+        // required
       />
       <button className="search-btn">Search</button>
     </form>

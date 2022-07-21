@@ -1,0 +1,14 @@
+.repos {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .repos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
