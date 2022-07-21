@@ -12,7 +12,6 @@ const AutoComplete = ({
       return (
         <ul className="autocomplete">
           {filtered.map((suggestion, index) => {
-            console.log(suggestion);
             let className;
             if (index === active) {
               className = "active";

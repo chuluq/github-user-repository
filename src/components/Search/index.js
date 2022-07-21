@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
-import { useGithubContext } from "../../hooks/useGithubContext";
+
+// components
 import AutoComplete from "../AutoComplete";
+import Spinner from "../Spinner";
+
+// context
+import { useGithubContext } from "../../hooks/useGithubContext";
+
 import "./styles.css";
 
 const Search = () => {
@@ -31,7 +37,6 @@ const Search = () => {
       setActive(0);
       setFiltered(suggestions);
       setIsShow(true);
-      setSearchText(searchText);
     };
 
     handleFilter();
@@ -97,21 +102,16 @@ const Search = () => {
         />
         <button className="search-btn">Search</button>
       </form>
-      {loading && (
-        <div className="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      )}
-      <AutoComplete
-        active={active}
-        filtered={filtered}
-        handleClick={handleClick}
-        isShow={isShow}
-        searchText={searchText}
-      />
+      <div className="search-results">
+        {loading && <Spinner />}
+        <AutoComplete
+          active={active}
+          filtered={filtered}
+          handleClick={handleClick}
+          isShow={isShow}
+          searchText={searchText}
+        />
+      </div>
     </>
   );
 };

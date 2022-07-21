@@ -8,6 +8,8 @@ import "./styles.css";
 const Repos = () => {
   const { repos } = useGithubContext();
 
+  console.log(repos);
+
   return (
     <div className="repos">
       {repos?.map((repo) => (
