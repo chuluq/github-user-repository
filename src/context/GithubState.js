@@ -38,7 +38,6 @@ const GithubState = (props) => {
       `https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     const data = await res.json();
-    console.log("user", data);
 
     dispatch({
       type: SEARCH_USERS,
@@ -54,7 +53,6 @@ const GithubState = (props) => {
       `https://api.github.com/users/${username}/repos?sort=created&direction=asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
     const data = await res.json();
-    console.log("user", data);
 
     dispatch({
       type: GET_REPOS,

@@ -38,3 +38,34 @@
   color: black;
   cursor: pointer;
 }
+
+.modal-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem;
+}
+.modal-details .modal-name {
+  color: var(--header);
+}
+.modal-details .modal-name h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.modal-details .modal-name p {
+  font-size: 14px;
+}
+.modal-details .modal-details-content {
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+.modal-details .modal-details-content h3 {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+.modal-details .modal-details-content p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}

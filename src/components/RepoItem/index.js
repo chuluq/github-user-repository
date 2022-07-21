@@ -23,7 +23,11 @@ const RepoItem = ({ repo }) => {
         <span className="material-symbols-outlined">info</span>
       </div>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} handleClick={handleCloseModal} />
+        <Modal
+          isOpen={isModalOpen}
+          repo={repo}
+          handleClick={handleCloseModal}
+        />
       )}
     </>
   );
