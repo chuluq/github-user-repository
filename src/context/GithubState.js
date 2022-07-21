@@ -3,10 +3,10 @@ import { GithubContext } from "./GithubContext";
 import { GithubReducer } from "./GithubReducer";
 import {
   SEARCH_USERS,
-  GET_USER,
   CLEAR_USERS,
   GET_REPOS,
   SET_LOADING,
+  SET_SUGGESTIONS,
 } from "./types";
 
 let githubClientId;
@@ -25,6 +25,7 @@ const GithubState = (props) => {
     users: [],
     user: {},
     repos: [],
+    suggestions: [],
     loading: false,
   };
 
@@ -43,6 +44,8 @@ const GithubState = (props) => {
       type: SEARCH_USERS,
       payload: data,
     });
+
+    setSuggestions(data, text);
   };
 
   // Get Repos
@@ -60,6 +63,16 @@ const GithubState = (props) => {
     });
   };
 
+  // Set suggestions
+  const setSuggestions = (users, text) => {
+    const newFilteredSuggestions = users?.items?.filter(
+      (suggestion) =>
+        suggestion?.login.toLowerCase().indexOf(text.toLowerCase()) > -1
+    );
+
+    dispatch({ type: SET_SUGGESTIONS, payload: newFilteredSuggestions });
+  };
+
   // Clear Users
   const clearUsers = () => dispatch({ type: CLEAR_USERS });
 
@@ -72,6 +85,7 @@ const GithubState = (props) => {
         users: state.users,
         user: state.user,
         repos: state.repos,
+        suggestions: state.suggestions,
         loading: state.loading,
         searchUsers,
         clearUsers,

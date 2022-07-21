@@ -1,24 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGithubContext } from "../../hooks/useGithubContext";
+import AutoComplete from "../AutoComplete";
 import "./styles.css";
 
-const Search = ({ suggestions }) => {
+const Search = () => {
   const [searchText, setSearchText] = useState("");
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
   const [isShow, setIsShow] = useState(false);
-  const { users, loading, searchUsers, getUserRepos } = useGithubContext();
+  const { suggestions, loading, searchUsers, getUserRepos } =
+    useGithubContext();
 
   const handleChange = (e) => {
     const input = e.currentTarget.value;
-    const newFilteredSuggestions = suggestions.filter(
-      (suggestion) => suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1
-    );
-    setActive(0);
-    setFiltered(newFilteredSuggestions);
-    setIsShow(true);
-    setSearchText(e.currentTarget.value);
+
+    if (!input) {
+      return setSearchText("");
+    }
+
+    setSearchText(input);
+    searchUsers(input);
   };
+
+  useEffect(() => {
+    if (suggestions.length === 0) {
+      return;
+    }
+
+    const handleFilter = () => {
+      setActive(0);
+      setFiltered(suggestions);
+      setIsShow(true);
+      setSearchText(searchText);
+    };
+
+    handleFilter();
+  }, [suggestions]);
 
   const handleClick = (e) => {
     setActive(0);
@@ -42,50 +59,15 @@ const Search = ({ suggestions }) => {
     }
   };
 
-  const renderAutoComplete = () => {
-    if (isShow && searchText) {
-      if (filtered.length) {
-        return (
-          <ul className="autocomplete">
-            {filtered.map((suggestion, index) => {
-              let className;
-              if (index === active) {
-                className = "active";
-              }
-              return (
-                <li
-                  className={className}
-                  key={suggestion}
-                  onClick={handleClick}
-                >
-                  {suggestion}
-                </li>
-              );
-            })}
-          </ul>
-        );
-      } else {
-        return (
-          <div className="no-autocomplete">
-            <em>Not found</em>
-          </div>
-        );
-      }
-    }
-
-    return;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!searchText) {
-    //   return;
-    // }
+    if (!searchText) {
+      return;
+    }
 
-    // searchUsers(searchText);
-    // getUserRepos("chuluq");
-    // setSearchText("");
+    getUserRepos(searchText);
+    setSearchText("");
   };
 
   return (
@@ -115,7 +97,21 @@ const Search = ({ suggestions }) => {
         />
         <button className="search-btn">Search</button>
       </form>
-      {renderAutoComplete()}
+      {loading && (
+        <div className="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
+      <AutoComplete
+        active={active}
+        filtered={filtered}
+        handleClick={handleClick}
+        isShow={isShow}
+        searchText={searchText}
+      />
     </>
   );
 };

@@ -4,6 +4,7 @@ import {
   CLEAR_USERS,
   GET_REPOS,
   SET_LOADING,
+  SET_SUGGESTIONS,
 } from "./types";
 
 export const GithubReducer = (state, action) => {
@@ -30,6 +31,13 @@ export const GithubReducer = (state, action) => {
       return {
         ...state,
         repos: action.payload,
+        loading: false,
+      };
+    }
+    case SET_SUGGESTIONS: {
+      return {
+        ...state,
+        suggestions: action.payload,
         loading: false,
       };
     }
